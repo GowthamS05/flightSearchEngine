@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Fligt Booking Application">
+    <meta name="keywords" content="HTML,CSS,JavaScript">
+    <meta name="author" content="Gowtham Subramanian">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="./assets/js/mockData.js"></script>
+    <script type="text/javascript" src="./assets/js/tabsSwitch.js"></script>
+    <script type="text/javascript" src="./assets/js/generateAutoSearch.js"></script>
+    <script type="text/javascript" src="./assets/js/dateValidation.js"></script>
+    <script type="text/javascript" src="./assets/js/generateSearchResult.js"></script>
+    <script type="text/javascript" src="./assets/js/script.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/media.css">
+
+
+</head>
+
+<body>
+    <h1><span style="color:rgba(3, 3, 3, 0.57)">CHOOSE</span> YOUR <span style="color:rgba(3, 3, 3, 0.57)">DESTINATION</span>
+        <img src="https://cdn.clipart.email/f9ce2d87d10e7f6ee3332875aa99f70e_plane-clip-art-at-clkercom-vector-clip-art-online-royalty-free-_943-619.svg" alt="Smiley face" height="42" width="52">
+    </h1>
+    <!--search engine starts-->
+    <div id="notificationBar">
+        <span><b>!! Alert !!: </b></span><span id="notificationMessage"></span>
+    </div>
+    <div class="parentDiv">
+        <div class="subDiv">
+            <div id="horizontalTab">
+                <ul class="tabHeader">
+                    <li id="roundTab" class="tabItem active" onclick="openTab('roundSingleTrip','roundTab')"><span>Round Trip</span></li>
+                    <li id="singleTab" class="tabItem" onclick="openTab('roundSingleTrip','singleTab')"><span>One way</span></li>
+                    <li id="searchTab" class="tabItem" onclick="openTab('searchResults','searchTab')"><span>search results</span></li>
+                </ul>
+                <div class="tabContainer">
+                    <div id="roundSingleTrip" class="tabContent tabActiveContent roundtrip">
+                        <div class="form">
+                            <table class="width100">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="1">
+                                            <div class="from">
+                                                <h3>From <span class="red">*</span></h3>
+                                                <input type="text" name="place" id="departurePlace" onkeyup="onPlaceChange('departurePlace','chooseDepartureUl')" onclick="showDiv('departurePlace','chooseDepartureUl')" class="city1 textBox" placeholder="Departure Place" required>
+                                                <br/><br/>
+                                                <ul id="chooseDepartureUl" class="searchPosition ulPositioning">
+                                                </ul>
+                                            </div>
+                                        </td>
+                                        <td colspan="1">
+                                            <div class="to">
+                                                <h3>To <span class="red">*</span></h3>
+                                                <input type="text" name="place" id="returnPlace" onkeyup="onPlaceChange('returnPlace','chooseReturnUl')" onclick="showDiv('returnPlace','chooseReturnUl')" class="city1 textBox" placeholder="Destination Place" required>
+                                                <br/><br/>
+                                                <ul id="chooseReturnUl" class="searchPosition ulPositioning">
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="1">
+                                            <div class="from positionRelative">
+                                                <h3>Departure Date <span class="red">*</span></h3>
+                                                <input type="text" name="month" class="widthMonth" id="monthDep" name="monthDepature" onkeypress="return isNumber(event)" onblur="return checkMonth(document.getElementById('monthDep').value,'monthDep','dayDep','yearDep')" placeholder="month" required/>
+                                                <b class="hypenColor">-</b>
+                                                <input type="text" name="month" class="widthDay" id="dayDep" name="dateDepature" onkeypress="return isNumber(event)" onblur="return checkDay(document.getElementById('dayDep').value,'monthDep','dayDep','yearDep')" placeholder="date" disabled required/>                                                <b class="hypenColor">-</b>
+                                                <input type="text" name="year" class="widthYear" id="yearDep" name="yearDepature" onkeypress="return isNumber(event)" onblur="return checkYear(document.getElementById('yearDep').value,'monthDep','dayDep','yearDep')" placeholder="year" disabled required/>
+
+                                            </div>
+                                        </td>
+                                        <td colspan="1">
+                                            <div class="to positionRelative" id="destDate">
+                                                <h3>Return Date <span class="red">*</span></h3>
+                                                <input type="text" name="month" class="widthMonth" id="monthArrival" name="monthArrival" onkeypress="return isNumber(event)" onblur="return checkMonth(document.getElementById('monthArrival').value,'monthArrival','dayArrival','yearArrival')" placeholder="month"
+                                                    required />
+                                                <b class="hypenColor">-</b>
+                                                <input type="text" name="day" class="widthDay" id="dayArrival" name="dayArrival" onkeypress="return isNumber(event)" onblur="return checkDay(document.getElementById('dayArrival').value,'monthArrival','dayArrival','yearArrival')" placeholder="date" disabled
+                                                    required/> <b class="hypenColor">-</b>
+                                                <input type="text" name="year" class="widthYear" id="yearArrival" name="yearArrival" onkeypress="return isNumber(event)" onblur="return checkYear(document.getElementById('yearArrival').value,'monthArrival','dayArrival','yearArrival')" placeholder="year"
+                                                    disabled required />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="1">
+                                            <div class="from positionRelative">
+                                                <h3>Passengers <span class="red">*</span></h3>
+                                                <select id="choosePassengers" required class="inputSelect width80">
+                                                    <option value="" disabled selected>Select your option</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    
+                                                  </select> </div>
+                                        </td>
+                                        <td colspan="1">
+                                            <div class="to positionRelative">
+                                                <h3>Class <span class="red">*</span></h3>
+                                                <select id="chooseClass" required class="inputSelect width80">
+                                                    <option value="" disabled selected>Select your option</option>
+                                                    <option value="business">Business</option>
+                                                    <option value="economy">Economy</option>
+                                                  </select>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" align="center">
+                                            <div class="marginTop">
+                                                <button type="button" class="btn" onclick="submitSearch()">Search Flights</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="searchResults" class="tabContent SearchResult">
+                        <div class="form">
+                            <table class="filterTable">
+                                <tr>
+                                    <td><label class="white">Filter By:</label></td>
+                                    <td><select id="chooseFilter" class="searchBox" onchange="enableFilteredResult()">
+                                        <option value="" disabled selected>Select your option</option>
+                                        <option value="Price">Price</option>
+                                        
+                                      </select></td>
+                                    <td><input type="text" id="filterValue" class="searchBox" onkeypress="return isNumber(event)" disabled></td>
+                                    <td><input type="button" id="filterBtn" class="btn" onclick="filterValues(document.getElementById('filterValue').value)" value="Filter" disabled></td>
+                                    <td><label class="white">Sort Price:</label></td>
+                                    <td colspan="2"><select id="chooseSort" class="searchBox" onchange="enableSortResult(document.getElementById('chooseSort').value)">
+                                        <option value="" disabled selected>Select your option</option>
+                                        <option value="asc">Ascending</option>
+                                        <option value="desc">Descending</option>
+                                                      </select></td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <div id="accordion">
+
+                            </div>
+                            <div class="marginTop alignCenter">
+                                <button type="button" class="btn">Book Tickets</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- search engine ends -->
+
+
+</body>
+
+</html>

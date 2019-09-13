@@ -1,0 +1,49 @@
+        @media only screen and (max-width: 600px) and (min-width: 400px) {
+        .parentDiv {
+            width: 100%;
+        }
+        .ulPositioning {
+            width: 37%;
+        }
+        .card {
+            padding: 0;
+            margin: 0;
+        }
+    }
+    
+    @media only screen and (max-width: 399px) and (min-width: 100px) {
+        .parentDiv {
+            width: 100%;
+        }
+        .ulPositioning {
+            width: 37%;
+        }
+        .card {
+            padding: 0;
+            margin: 0;
+        }
+    }
+    
+    @media only screen and (max-width: 1023px) and (min-width:601px) {
+        .parentDiv {
+            width: 95%;
+        }
+        .ulPositioning {
+            width: 37%;
+        }
+        .card {
+            padding: 0;
+            margin: 0;
+        }
+        @media only screen and (max-width: 1024px) and (min-width:1300px) {
+            .parentDiv {
+                width: 95%;
+            }
+            .ulPositioning {
+                width: 37%;
+            }
+            .card {
+                padding: 0;
+                margin: 0;
+            }
+        }
